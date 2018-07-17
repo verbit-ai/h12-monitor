@@ -1,13 +1,26 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.3.3)
-    crack (0.3.2)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    byebug (10.0.2)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     daemons (1.1.9)
     diff-lcs (1.1.3)
-    excon (0.16.10)
-    heroku-api (0.3.7)
-      excon (~> 0.16.10)
+    erubis (2.7.0)
+    excon (0.62.0)
+    heroics (0.0.24)
+      erubis (~> 2.0)
+      excon
+      moneta
+      multi_json (>= 1.9.2)
+    moneta (0.8.1)
+    multi_json (1.13.1)
+    platform-api (2.1.0)
+      heroics (~> 0.0.23)
+      moneta (~> 0.8.1)
+    public_suffix (3.0.2)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
@@ -16,9 +29,10 @@ GEM
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
     rspec-mocks (2.12.2)
-    rspec-spies (2.1.3)
+    rspec-spies (2.1.4)
       rspec (~> 2.0)
-    webmock (1.9.2)
+    safe_yaml (1.0.4)
+    webmock (1.9.3)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
 
@@ -26,8 +40,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug
   daemons (~> 1.1.9)
-  heroku-api (~> 0.3.7)
+  platform-api (~> 2.1.0)
   rspec (~> 2.12.0)
   rspec-spies (~> 2.1.3)
   webmock (~> 1.9.2)
+
+RUBY VERSION
+   ruby 2.5.0p-1
+
+BUNDLED WITH
+   1.16.1

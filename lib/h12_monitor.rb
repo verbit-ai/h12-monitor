@@ -39,11 +39,11 @@ class H12Monitor
   private
 
   def heroku_connection
-    @heroku_connection ||= Heroku::API.new(api_key: @heroku_api_key)
+    @heroku_connection ||= PlatformAPI.connect(@heroku_api_key)
   end
 
   def heroku_params
-    { tail: '1', ps: 'router' }
+    { tail: true, dyno: 'router' }
   end
 
   def update_line_statistics

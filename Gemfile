@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '~> 2.5.0'
 
 gem 'daemons', '~> 1.1.9'
-gem 'heroku-api', '~> 0.3.7'
+gem 'platform-api', '~> 2.1.0'
 
 group :test do
   gem 'rspec', '~> 2.12.0'

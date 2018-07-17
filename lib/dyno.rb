@@ -36,6 +36,8 @@ class Dyno
 
   def restart_dyno
     MonitorLogger.warn "restarting dyno #{@name}"
-    @heroku_connection.post_ps_restart @app_name, ps: @name
+    # `heroku ps:stop -a #{@app_name} #{dyno_name}`
+    @heroku_connection.dyno.stop @app_name, @name
+    # @heroku_connection.post_ps_restart @app_name, ps: @name
   end
 end
