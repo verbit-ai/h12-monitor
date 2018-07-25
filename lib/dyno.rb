@@ -8,15 +8,18 @@ class Dyno
     @app_name = app_name
     @name = dyno_name
     @error_count = 0
+    @next_restart_at = Time.now
   end
 
   def handle_h12
+    return if Time.now < @next_restart_at
     add_to_error_count
     MonitorLogger.warn "#{@name} reports H12 (##{@error_count})"
 
     if exceeded_error_count?
       restart_dyno
       reset_error_count
+      @next_restart_at = 30.seconds.from_now # ignoring errors for 30 seconds after restart.
     end
   end
 
