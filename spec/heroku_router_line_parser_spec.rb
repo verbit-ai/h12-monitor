@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'heroku_router_line_parser'
 
-describe HerokuRouterLineParser do
+RSpec.describe HerokuRouterLineParser do
   context 'with a router log entry' do
     context 'with a non-H12 entry' do
       context 'without line breaks' do
@@ -11,10 +11,10 @@ describe HerokuRouterLineParser do
         end
 
         it 'should return the correct hash' do
-          @result.should == {"2013-02-17T17:59:50+00:00"=>nil, "heroku[router]:"=>nil, "at"=>"info",
+          expect(@result).to eq({"2013-02-17T17:59:50+00:00"=>nil, "heroku[router]:"=>nil, "at"=>"info",
             "method"=>"GET", "path"=>"/", "host"=>"www.myapp.com", "fwd"=>"\"1.2.3.4,",
             "9.8.7.6\""=>nil, "dyno"=>"web.3", "queue"=>"0", "wait"=>"4ms", "connect"=>"4ms",
-            "service"=>"729ms", "status"=>"200", "bytes"=>"13057"}
+            "service"=>"729ms", "status"=>"200", "bytes"=>"13057"})
         end
       end
 
@@ -25,10 +25,10 @@ describe HerokuRouterLineParser do
         end
 
         it 'should return the correct hash' do
-          @result.should == {"2013-02-17T18:19:20+00:00"=>nil, "heroku[router]:"=>nil,
+          expect(@result).to eq({"2013-02-17T18:19:20+00:00"=>nil, "heroku[router]:"=>nil,
             "at"=>"info", "method"=>"GET", "path"=>"/some_url", "host"=>"www.myapp.com",
             "fwd"=>"\"1.2.3.4,", "9.8.7.6\""=>nil, "dyno"=>"web.10", "queue"=>"0", "wait"=>"0ms",
-            "connect"=>"1ms", "service"=>"107ms", "status"=>"200", "bytes"=>"1029"}
+            "connect"=>"1ms", "service"=>"107ms", "status"=>"200", "bytes"=>"1029"})
         end
       end
     end
@@ -40,11 +40,11 @@ describe HerokuRouterLineParser do
       end
 
       it 'should return the correct hash' do
-        @result.should == {"2013-02-15T16:33:04+00:00"=>nil, "heroku[router]:"=>nil,
+        expect(@result).to eq({"2013-02-15T16:33:04+00:00"=>nil, "heroku[router]:"=>nil,
           "at"=>"error", "code"=>"H12", "desc"=>"\"Request", "timeout\""=>nil, "method"=>"GET",
           "path"=>"/some_url", "host"=>"www.myapp.com", "fwd"=>"1.2.3.4", "dyno"=>"web.15",
           "queue"=>"0ms", "wait"=>"0ms", "connect"=>"4085ms", "service"=>"30001ms",
-          "status"=>"503", "bytes"=>"0"}
+          "status"=>"503", "bytes"=>"0"})
       end
     end
   end
@@ -57,7 +57,7 @@ describe HerokuRouterLineParser do
       end
 
       it 'should return nil' do
-        @result.should be_nil
+        expect(@result).to be_nil
       end
     end
 
@@ -67,7 +67,7 @@ describe HerokuRouterLineParser do
       end
 
       it 'should return nil' do
-        @result.should be_nil
+        expect(@result).to be_nil
       end
     end
 
@@ -77,7 +77,7 @@ describe HerokuRouterLineParser do
       end
 
       it 'should return nil' do
-        @result.should be_nil
+        expect(@result).to be_nil
       end
     end
   end
@@ -90,7 +90,7 @@ describe HerokuRouterLineParser do
     end
 
     it 'should return nil' do
-      @result.should be_nil
+      expect(@result).to be_nil
     end
   end
 end

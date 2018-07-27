@@ -1,54 +1,60 @@
 require 'spec_helper'
 require 'heroku_log_streamer'
+require 'json'
 
-describe HerokuLogStreamer do
+RSpec.describe HerokuLogStreamer do
   context 'OPEN_TIMEOUT' do
     it 'should be expected' do
-      HerokuLogStreamer::OPEN_TIMEOUT.should == 5
+      expect(HerokuLogStreamer::OPEN_TIMEOUT).to eq(5)
     end
   end
 
   context 'READ_TIMEOUT' do
     it 'should be expected' do
-      HerokuLogStreamer::READ_TIMEOUT.should == 10
+      expect(HerokuLogStreamer::READ_TIMEOUT).to eq(10)
     end
   end
 
   context 'stream' do
+    let(:heroku_logs_uri) { 'https://api.heroku.com/apps/myapp/logs?logplex=true&tail=1' }
+    let(:heroku_connection) { PlatformAPI.connect('fake_api_key') }
+    let!(:log_session_request) {
+      stub_request(:post, 'https://api.heroku.com/apps/myapp/log-sessions')
+        .with(body: {'tail' => '1'})
+        .to_return(
+          status: 200,
+          body: {logplex_url: heroku_logs_uri}.to_json,
+          headers: {'Content-Type' => 'application/json'}
+        )
+    }
+    let!(:logs_request) { stub_request(:get, heroku_logs_uri).to_return(status: 200) }
+    let!(:logger) { stub_logger }
+    let(:streamer) { HerokuLogStreamer.new(heroku_connection, 'myapp', tail: '1') }
+
     before do
-      @heroku_connection = stub get_logs: stub(body: heroku_logs_uri)
-      @logs_request = stub_request(:get, heroku_logs_uri).to_return(status: 200)
-
-      @logger = stub_logger
-      @logger.stub(:info)
-
-      @streamer = HerokuLogStreamer.new(@heroku_connection, 'myapp', tail: '1')
-      @streamer.stream
+      allow(logger).to receive(:info)
+      streamer.stream
     end
 
     it 'should connect to the correct URI' do
-      @logs_request.should have_been_requested
+      expect(logs_request).to have_been_requested
     end
 
     it 'should log a connection message' do
-      @logger.should have_received(:info).with('Connecting to Heroku logplex for myapp.')
+      expect(logger).to have_received(:info).with('Connecting to Heroku logplex for myapp.')
     end
 
-    pending 'should yield with log line'
-    pending 'should retry on timeout error'
-    pending 'should retry on connection error'
-    pending 'should retry on end of file error'
+    skip 'should yield with log line'
+    skip 'should retry on timeout error'
+    skip 'should retry on connection error'
+    skip 'should retry on end of file error'
   end
 
   private
 
-  def heroku_logs_uri
-    'https://api.heroku.com/apps/myapp/logs?logplex=true&tail=1'
-  end
-
   def stub_logger
-    stub(Logger).tap do |logger|
-      MonitorLogger.stub_chain :instance, logger: logger
+    double(Logger).tap do |logger|
+      allow(MonitorLogger).to receive_message_chain :instance, logger: logger
     end
   end
 end

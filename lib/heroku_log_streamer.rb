@@ -41,6 +41,7 @@ class HerokuLogStreamer
   private
 
   def heroku_log_url
+    puts @heroku_connection.log_session.create(@app_name, @heroku_opts).inspect
     @url ||= URI.parse(@heroku_connection.log_session.create(@app_name, @heroku_opts).fetch('logplex_url'))
   end
 

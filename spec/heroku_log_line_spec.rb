@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'heroku_log_line'
 
-describe HerokuLogLine do
+RSpec.describe HerokuLogLine do
   context 'with an h12' do
     before do
       log_entry = '2013-02-15T16:33:09+00:00 heroku[router]: at=error code=H12 desc="Request timeout" method=GET path=/some_url host=www.myapp.com fwd="1.2.3.4, 9.8.7.6" dyno=web.15 queue=0ms wait=2ms connect=3196ms service=30001ms status=503 bytes=0'
@@ -9,11 +9,11 @@ describe HerokuLogLine do
     end
 
     it 'should recognize this is an H12' do
-      @log_line.h12?.should be_true
+      expect(@log_line.h12?).to be_truthy
     end
 
     it 'should return the correct dyno' do
-      @log_line.dyno.should == 'web.15'
+      expect(@log_line.dyno).to eq('web.15')
     end
   end
 
@@ -24,11 +24,11 @@ describe HerokuLogLine do
     end
 
     it 'should recognize this is not an H12' do
-      @log_line.h12?.should be_false
+      expect(@log_line.h12?).to be_falsey
     end
 
     it 'should return the correct dyno' do
-      @log_line.dyno.should == 'web.10'
+      expect(@log_line.dyno).to eq('web.10')
     end
   end
 end
