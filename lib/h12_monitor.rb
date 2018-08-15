@@ -50,7 +50,7 @@ class H12Monitor
     @line_counter ||= 0
     @line_counter += 1
 
-    if @line_counter % 50 == 0
+    if @line_counter % 500 == 0
       dynos_reporting = "#{@dynos.count} dynos reporting"
       MonitorLogger.info "#{@app_name}: monitored #{@line_counter} lines, #{dynos_reporting}"
     end

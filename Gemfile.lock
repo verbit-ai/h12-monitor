@@ -9,6 +9,7 @@ GEM
     diff-lcs (1.3)
     erubis (2.7.0)
     excon (0.62.0)
+    hashdiff (0.3.7)
     heroics (0.0.24)
       erubis (~> 2.0)
       excon
@@ -20,23 +21,24 @@ GEM
       heroics (~> 0.0.23)
       moneta (~> 0.8.1)
     public_suffix (3.0.2)
-    rspec (3.7.0)
-      rspec-core (~> 3.7.0)
-      rspec-expectations (~> 3.7.0)
-      rspec-mocks (~> 3.7.0)
-    rspec-core (3.7.1)
-      rspec-support (~> 3.7.0)
-    rspec-expectations (3.7.0)
+    rspec (3.8.0)
+      rspec-core (~> 3.8.0)
+      rspec-expectations (~> 3.8.0)
+      rspec-mocks (~> 3.8.0)
+    rspec-core (3.8.0)
+      rspec-support (~> 3.8.0)
+    rspec-expectations (3.8.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.7.0)
-    rspec-mocks (3.7.0)
+      rspec-support (~> 3.8.0)
+    rspec-mocks (3.8.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.7.0)
-    rspec-support (3.7.1)
+      rspec-support (~> 3.8.0)
+    rspec-support (3.8.0)
     safe_yaml (1.0.4)
-    webmock (1.9.3)
-      addressable (>= 2.2.7)
+    webmock (3.4.2)
+      addressable (>= 2.3.6)
       crack (>= 0.3.2)
+      hashdiff
 
 PLATFORMS
   ruby
@@ -45,10 +47,10 @@ DEPENDENCIES
   daemons (~> 1.1.9)
   platform-api (~> 2.1.0)
   rspec (~> 3.0)
-  webmock (~> 1.9.2)
+  webmock (~> 3.4.2)
 
 RUBY VERSION
    ruby 2.5.0p-1
 
 BUNDLED WITH
-   1.16.1
+   1.16.3

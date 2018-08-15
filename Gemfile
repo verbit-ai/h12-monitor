@@ -6,5 +6,5 @@ gem 'platform-api', '~> 2.1.0'
 
 group :test do
   gem 'rspec', '~> 3.0'
-  gem 'webmock', '~> 1.9.2'
+  gem 'webmock', '~> 3.4.2'
 end

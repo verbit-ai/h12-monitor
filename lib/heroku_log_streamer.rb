@@ -1,6 +1,3 @@
-require 'uri'
-require 'net/http'
-
 class HerokuLogStreamer
   OPEN_TIMEOUT = 5
   READ_TIMEOUT = 10
@@ -41,7 +38,6 @@ class HerokuLogStreamer
   private
 
   def heroku_log_url
-    puts @heroku_connection.log_session.create(@app_name, @heroku_opts).inspect
     @url ||= URI.parse(@heroku_connection.log_session.create(@app_name, @heroku_opts).fetch('logplex_url'))
   end
 
