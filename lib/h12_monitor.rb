@@ -13,6 +13,7 @@ class H12Monitor
   end
 
   def monitor
+    MonitorLogger.notify_team 'Starting H12 Monitor...'
     loop do
       streamer = HerokuLogStreamer.new(heroku_connection, @app_name, heroku_params)
 
