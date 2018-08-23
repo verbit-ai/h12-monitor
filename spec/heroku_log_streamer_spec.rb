@@ -32,7 +32,7 @@ RSpec.describe HerokuLogStreamer do
     let(:streamer) { HerokuLogStreamer.new(heroku_connection, 'myapp', tail: '1') }
 
     before do
-      described_class::RETRY_DELAY_BASE = 0
+      stub_const("#{described_class.name}::RETRY_DELAY_BASE", 0)
       allow(logger).to receive(:info)
     end
 

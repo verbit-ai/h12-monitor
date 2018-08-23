@@ -18,9 +18,13 @@ class HerokuLogStreamer
       path = heroku_log_url.path + (heroku_log_url.query ? "?" + heroku_log_url.query : "")
 
       request.request_get(path) do |request|
+        buffer = ''
         request.read_body do |chunk|
-          chunk.split("\n").each do |line|
-            yield line
+          @error_count = 0
+          buffer << chunk
+          while buffer.sub!(/^(.*?)\n/, '')
+            puts $1
+            yield $1
           end
         end
       end
