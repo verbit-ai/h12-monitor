@@ -23,7 +23,6 @@ class HerokuLogStreamer
           @error_count = 0
           buffer << chunk
           while buffer.sub!(/^(.*?)\n/, '')
-            puts $1
             yield $1
           end
         end
