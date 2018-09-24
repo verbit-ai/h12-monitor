@@ -2,6 +2,7 @@ require 'monitor_logger'
 
 class Dyno
   MAX_ALLOWED_ERROR_COUNT = 10
+  RESTART_TIMEOUT = ENV.fetch('H12_MONITOR_RESTART_TIMEOUT', 60).to_i # wait for n seconds before next restart.
 
   def initialize(heroku_connection, app_name, dyno_name)
     @heroku_connection = heroku_connection
@@ -19,7 +20,7 @@ class Dyno
     if exceeded_error_count?
       restart_dyno
       reset_error_count
-      @next_restart_at = Time.now + 30
+      @next_restart_at = Time.now + RESTART_TIMEOUT
     end
   end
 
