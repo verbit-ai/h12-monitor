@@ -26,7 +26,7 @@ class H12Monitor
           if log_line.h12?
             @dynos[dyno_name].handle_h12
           else
-            @dynos[dyno_name].reset_error_count
+            @dynos[dyno_name].reset_errors
           end
         else
           MonitorLogger.info "malformed line: #{line}"
