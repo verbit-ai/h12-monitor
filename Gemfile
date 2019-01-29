@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '~> 2.5.0'
+ruby '~> 2.6.0'
 
 gem 'daemons', '~> 1.1.9'
 gem 'platform-api', '~> 2.1.0'
